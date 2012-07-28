@@ -1,0 +1,15 @@
+var PlayerData = {}
+PlayerData.hp = 100
+PlayerData.speed = 8
+PlayerData.direction = "se"
+PlayerData.state = "NORMAL"
+PlayerData.attackSpeed = 1
+PlayerData.id = 1
+PlayerData.attackDistance = 40
+PlayerData.name = "laidback"
+PlayerData.action = "move"
+PlayerData.className = "knight"
+PlayerData.maxhp = 100
+PlayerData.actionStartTime = 1342705216210
+PlayerData.y = 205
+PlayerData.x = 205

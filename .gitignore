@@ -1,0 +1,4 @@
+*.class
+DominionJavaServer/target
+DominionJavaServer/target/*
+
