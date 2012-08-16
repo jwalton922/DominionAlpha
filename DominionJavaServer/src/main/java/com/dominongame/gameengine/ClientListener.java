@@ -20,10 +20,12 @@ public class ClientListener {
      private static Logger log = Logger.getLogger(ClientListener.class);
      private ClientListenerThread clt;
      private String EXCHANGE_NAME;
+     private String ROUTING_KEY;
      private ArrayList<String> actionMessages = new ArrayList<String>();
 
-     public ClientListener(String exchangeName) {
+     public ClientListener(String exchangeName, String routingKey) {
           EXCHANGE_NAME = exchangeName;
+          ROUTING_KEY = routingKey;
      }
 
      public void startListening() {
@@ -63,7 +65,7 @@ public class ClientListener {
 //        channel.
                     String queueName = channel.queueDeclare("dominion-queue", false, false, false, null).getQueue();
                     System.out.println("QUEUE NAME = " + queueName);
-                    channel.queueBind(queueName, EXCHANGE_NAME, "action-topic");
+                    channel.queueBind(queueName, EXCHANGE_NAME, ROUTING_KEY);
 
                     System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 

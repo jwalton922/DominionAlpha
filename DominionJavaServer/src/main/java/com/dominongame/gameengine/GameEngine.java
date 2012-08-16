@@ -27,6 +27,21 @@ public class GameEngine implements GameEngineIF {
           this.npcMap = npcs;
      }
 
+     @Override
+     public Player getPlayer(String username){
+          logger.debug("getPlayer called for username = "+username);
+          Player retPlayer = null;
+          for(Player player: playerMap.values()){
+               logger.debug("checkign player: "+player.getName());
+               if(player.getName().equalsIgnoreCase(username)){
+                    retPlayer = player;
+                    break;
+               }
+          }
+
+          return retPlayer;
+     }
+
      /**
       * This method will update state for the next time step
       * and process any new actions passed in

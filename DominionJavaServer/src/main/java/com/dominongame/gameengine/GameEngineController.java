@@ -26,8 +26,8 @@ public class GameEngineController {
      private boolean continueRunning = true;
      private GameEngineIF gameEngine;
      private ClientListener clientListener;
-     private String EXCHANGE_NAME = "DOMINION_CLIENT_EXCHANGE";
-     private String OUTGOING_QUEUE = "DOMINION_GAME_STATE_TOPIC"; //is this an exchange, queue, or topic?
+     public static String EXCHANGE_NAME = "DOMINION_CLIENT_EXCHANGE";
+     private String OUTGOING_TOPIC = "DOMINION_GAME_STATE_TOPIC"; //is this an exchange, queue, or topic?
      private Channel outGoingChannel;
 
      public GameEngineController() {
@@ -40,7 +40,7 @@ public class GameEngineController {
 
      private void init() {
 
-          clientListener = new ClientListener("some-exchange4");
+          clientListener = new ClientListener("some-exchange4", "action-topic");
           log.info("Starting clientListener");
           clientListener.startListening();
           try {
@@ -92,7 +92,7 @@ public class GameEngineController {
                byte[] outGoingBytes = outgoingJson.getBytes();
                //log.debug("publishing " + outGoingBytes.length + " bytes of data");
                //log.debug("outgoing json: "+outgoingJson);
-               outGoingChannel.basicPublish(EXCHANGE_NAME, OUTGOING_QUEUE, null, outGoingBytes);
+               outGoingChannel.basicPublish(EXCHANGE_NAME, OUTGOING_TOPIC, null, outGoingBytes);
           } catch (Exception e) {
                log.error("Error publishing game state", e);
           }

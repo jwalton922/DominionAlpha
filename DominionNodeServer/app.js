@@ -11,8 +11,7 @@ var express = require('express');
 //var sqlite3 = require('sqlite3').verbose();
 var clientSockets = []
 var io = require('socket.io');
-
-
+var dataRequestMap = {};
 
 var app = module.exports = express.createServer()
 , io = io.listen(app);
@@ -73,8 +72,8 @@ app.get('/', function(req, res){
 });
 
 app.get('/game', function(req, res){
-  console.log(req.session.username)
-  res.render('game.jade', {
+  console.log("rendering GameClient for user: "+req.session.username)
+  res.render('GameClient.jade', {
     title: "Dominion Online",
     locals: {
       session: req.session
@@ -85,6 +84,7 @@ app.get('/game', function(req, res){
 app.post('/users/login', function(req,res){
   console.log("username: "+req.body.user.username+" is logging in");
   req.session.username = req.body.user.username;
+  req.session.token = Math.random();
   res.redirect('/game');
 });
 
@@ -107,8 +107,18 @@ io.sockets.on('connection', function(socket){
   socket.on('action request', function(data){
 
     console.log("Action request: "+data.name+" action = "+data.action+" at "+data.x+","+data.y);
+    
     exchange.publish("action-topic", data);
   //engine.processActionRequest(user,id, action, x, y);
+  });
+
+  socket.on('ClientPlayerDataRequest', function(data){
+    console.log("Received ClientPlayerDataRequest for "+data.username);
+    var time = Date.now();
+    var uniqueKey = data.username+"_"+time;
+    data.socketKey = uniqueKey;
+    dataRequestMap[uniqueKey] = socket;
+    exchange.publish("data.topic", data);
   });
 });
 var connection = null;
@@ -123,6 +133,23 @@ if(connection != null){
   connection.addListener('ready', function(){
     exchange = connection.exchange('some-exchange4', {
       type : 'direct'
+    });!
+    connection.queue('DOMINION_CLIENT_EXCHANGE', function(queue){
+      queue.bind('DOMINION_CLIENT_EXCHANGE', 'DOMINION_DATA_REQUEST_TOPIC');
+      queue.subscribe(function (data_message, headers, deliveryInfo) {
+        console.log(data_message.data);
+        var message = JSON.parse(data_message.data);
+        console.log("Received data message: "+message);
+        console.log("Looking up socket for key: "+message.socketKey);
+
+        var socket = dataRequestMap[message.socketKey];
+        if(socket != null){
+          socket.emit(message.type, message);
+        } else {
+          console.log("Could not find socket for key: "+data_message.socketKey);
+        }
+
+      });
     });
     console.log("adding socket.io emit function on rabbitmq message");
     var queue = connection.queue('DOMINION_CLIENT_EXCHANGE',function(queue){

@@ -17,4 +17,6 @@ public interface GameEngineIF {
 
      public GameStateContainer getGameState();
 
+     public Player getPlayer(String username);
+
 }
