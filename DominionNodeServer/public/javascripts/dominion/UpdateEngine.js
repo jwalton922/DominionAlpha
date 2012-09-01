@@ -1,4 +1,76 @@
 var UpdateEngine = {};
+UpdateEngine.lastUpdateTime = -1;
+
+UpdateEngine.get
+
+/**
+ *main update loop
+ *
+ * apply player action
+ * check for server messages
+ * apply server state
+ * apply player actions
+ */
+UpdateEngine.update = function(){
+  var time = Date.now();
+  var serverMessages = GameEngine.getServerMessages();
+  var currentPlayer = GameEngine.getCurrentPlayer();
+  var clientStates = GameEngine.getClientStates();
+
+  var currentPlayerHistory = clientStates[currentPlayer.getId()];
+  console.debug("Current player has "+currentPlayerHistory.length + " history states");
+
+  var historyToCheck = [];
+
+  for(var i = 0; i < currentPlayerHistory.length; i++){
+    if(currentPlayerHistory[i].time > this.lastUpdatedTime){
+
+    }
+  }
+
+  var currentPlayerMessages = serverMessages[currentPlayer.getId()];
+  //handle server messages
+  var newAction = false;
+  if(GameEngine.hasClick()){
+    var coord = GameEngine.getClick();
+    var clickX = coord[0];
+    var clickY = coord[1];
+    console.debug("Determining action for click: "+clickX+","+clickY);
+    if(GameEngine.characterActionIsInterruptable(GameEngine.currentPlayer)){
+      var target = GameEngine.findTarget(clickX,clickY);
+      if(target == null){
+        console.debug("Did not find target. Action is a move");
+        
+        var waypoints = GameEngine.createWayPoints(currentPlayer.getX(), currentPlayer.getY(), clickX, clickY);
+        currentPlayer.setWayPoints(waypoints);
+        currentPlayer.setAction("move");
+        newAction = true;
+      
+      } else {
+        console.debug("Found target: "+target.toString());
+      }
+    }
+  }
+  var currentAction = currentPlayer.getAction();
+  if(currentAction == "move"){
+    var playerWaypoints = currentPlayer.getWayPoints();
+    if(playerWaypoints != null && playerWaypoints.size > 0){
+      var currWayPoint = playerWaypoints.pop();
+      currentPlayer.setX(currWayPoint.getX());
+      currentPlayer.setY(currWayPoint.getY());
+      currentPlayer.setDirection(currWayPoint.getDirection());
+    } else {
+      currentAction = "pause"
+    }
+
+  }
+
+
+
+
+
+
+}
 
 
 /**

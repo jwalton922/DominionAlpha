@@ -57,13 +57,13 @@ function Sprite(spriteImage, repeatAction)
     }
 
     this.createFrames = function(frameWidth,frameHeight,numFramesAcross,totalNumFrames){
-        countFrames = 0;
-        columnCount = 0;
-        rowCount = 0;
+        var countFrames = 0;
+        var columnCount = 0;
+        var rowCount = 0;
         while(countFrames < totalNumFrames) {
-            x = frameWidth*columnCount;
-            y = frameHeight*rowCount;
-            f = new Frame(x,y,frameWidth,frameHeight);
+            var x = frameWidth*columnCount;
+            var y = frameHeight*rowCount;
+            var f = new Frame(x,y,frameWidth,frameHeight);
             this.frames.push(f);
             countFrames = countFrames + 1;
             columnCount = columnCount + 1;
@@ -78,15 +78,15 @@ function Sprite(spriteImage, repeatAction)
  *files need to be named actionName_Direction.png
  */
 function createActionSpriteList(path, actionName, imageType, frameWidth, frameHeight, numFramesAcross, totalNumFrames, repeat) {
-    sprites = {};
-    for(i = 0; i < DIRECTIONS.length; i++){
-        full_path = path+actionName+"_"+DIRECTIONS[i]+"."+imageType;      
-        image = new Image();
+    var sprites = {};
+    for(var i = 0; i < DIRECTIONS.length; i++){
+        var full_path = path+actionName+"_"+DIRECTIONS[i]+"."+imageType;
+        var image = new Image();
         
         
         image.src = full_path;
         image.onload = preloadImage(image);
-        sprite = new Sprite(image, repeat);
+        var sprite = new Sprite(image, repeat);
         sprite.createFrames(frameWidth,frameHeight,numFramesAcross,totalNumFrames);
         sprites[DIRECTIONS[i]] = sprite;
     }

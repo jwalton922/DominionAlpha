@@ -11,6 +11,9 @@ function Character(){
   this.frameIndex = -1; //the current frame of the sprite animation
   this.direction = null; //direction entity is facing
   this.action = null; //name of current action - action names are keys in actions map
+  this.queuedAction = null;
+  this.queuedActionX = null;
+  this.queuedActionY = null;
   this.actionX = -1;
   this.actionY = -1;
   this.state = null;
@@ -24,6 +27,7 @@ function Character(){
   this.gold = 0;
   this.iron = 0;
   this.username = null;
+  this.waypoints = [];
 
   this.toString = function(){
     return "name: "+this.name+" username: "+this.username+" id: "+this.id+" x: "+this.x+" y: "+this.y+" dir: "+this.direction+" hp: "+this.hp+" maxhp: "+this.maxhp;
@@ -116,6 +120,18 @@ function Character(){
   this.getUsername = function(){return this.username;}
   this.setUsername = function(username){this.username = username;}
 
+  this.setWayPoints = function(waypoints){this.waypoints = waypoints;}
+  this.getWayPoints = function(){return this.waypoints;}
+
+  this.getQueuedAction = function(){return this.queuedAction;}
+  this.setQueuedAction = function(queuedAction){this.queuedAction = queuedAction;}
+
+  this.getQueuedActionX = function(){return this.queuedActionX;}
+  this.setQueuedActionX = function(queuedActionX){ this.queuedActionX = queuedActionX;}
+
+  this.getQueuedActionY = function(){return this.queuedActionY;}
+  this.setQueuedActionY = function(queuedActionY){ this.queuedActionY = queuedActionY;}
+
 }
 
 function WorldObject(){
@@ -150,6 +166,16 @@ function Message(message, x, y, timestamp){
   this.setX = function(x){this.x = x;}
   this.getY = function(){return this.y;}
   this.setY = function(y){this.y = y;}
+}
+
+function WayPoint(x, y, direction){
+  this.x = x;
+  this.y = y;
+  this.direction = direction;
+
+  this.getX = function(){return this.x;}
+  this.getY = function(){return this.y;}
+  this.getDirection = function(){return this.direction;}
 }
 
 
