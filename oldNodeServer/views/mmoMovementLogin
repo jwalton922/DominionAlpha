@@ -1,0 +1,14 @@
+form(action="/users/login", method="post")
+  label Username:
+  input(type="text", name='user[username]')
+  
+  input(type="submit", value='Login')
+
+
+
+
+
+
+
+
+

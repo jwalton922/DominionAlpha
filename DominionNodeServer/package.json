@@ -1,9 +1,14 @@
 {
-    "name": "application-name"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "express": "2.4.6"
-    , "jade": ">= 0.0.1"
+  "name": "zurvival",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "2.5.x",
+    "socket.io" : "0.9.6",
+    "jade" : "0.15.3",
+    "amqp" : "0.1.4"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
   }
 }

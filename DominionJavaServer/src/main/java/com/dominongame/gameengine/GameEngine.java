@@ -197,7 +197,4 @@ public class GameEngine implements GameEngineIF {
           npcMap.put(npc.getId(), npc);
      }
 
-     public static void main(String[] args) {
-          System.out.println(CharacterState.DEAD.toString());
-     }
 }

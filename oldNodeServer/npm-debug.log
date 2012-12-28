@@ -1,0 +1,50 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'node-amqp' ]
+2 info using npm@1.1.62
+3 info using node@v0.8.11
+4 verbose read json /Users/jwalton/workspace/DominionAlpha/DominionNodeServer/package.json
+5 warn package.json application-name@0.0.1 No README.md file found!
+6 verbose read json /Users/jwalton/workspace/DominionAlpha/DominionNodeServer/node_modules/amqp/package.json
+7 verbose read json /Users/jwalton/workspace/DominionAlpha/DominionNodeServer/node_modules/express/package.json
+8 verbose read json /Users/jwalton/workspace/DominionAlpha/DominionNodeServer/node_modules/jade/package.json
+9 verbose read json /Users/jwalton/workspace/DominionAlpha/DominionNodeServer/node_modules/socket.io/package.json
+10 verbose from cache /Users/jwalton/workspace/DominionAlpha/DominionNodeServer/package.json
+11 verbose readDependencies using package.json deps
+12 verbose cache add [ 'node-amqp', null ]
+13 silly cache add name=undefined spec="node-amqp" args=["node-amqp",null]
+14 verbose parsed url { pathname: 'node-amqp', path: 'node-amqp', href: 'node-amqp' }
+15 silly lockFile a9bbe2e6-node-amqp node-amqp
+16 verbose lock node-amqp /Users/jwalton/.npm/a9bbe2e6-node-amqp.lock
+17 silly lockFile a9bbe2e6-node-amqp node-amqp
+18 verbose addNamed [ 'node-amqp', '' ]
+19 verbose addNamed [ null, '' ]
+20 silly lockFile 77fc3a87-node-amqp node-amqp@
+21 verbose lock node-amqp@ /Users/jwalton/.npm/77fc3a87-node-amqp.lock
+22 silly addNameRange { name: 'node-amqp', range: '', hasData: false }
+23 verbose url raw node-amqp
+24 verbose url resolving [ 'https://registry.npmjs.org/', './node-amqp' ]
+25 verbose url resolved https://registry.npmjs.org/node-amqp
+26 info trying registry request attempt 1 at 20:58:20
+27 http GET https://registry.npmjs.org/node-amqp
+28 http 404 https://registry.npmjs.org/node-amqp
+29 silly registry.get cb [ 404,
+29 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+29 silly registry.get     date: 'Mon, 10 Dec 2012 03:57:31 GMT',
+29 silly registry.get     'content-type': 'application/json',
+29 silly registry.get     'content-length': '52',
+29 silly registry.get     'cache-control': 'must-revalidate' } ]
+30 silly lockFile 77fc3a87-node-amqp node-amqp@
+31 error 404 'node-amqp' is not in the npm registry.
+31 error 404 You should bug the author to publish it
+31 error 404
+31 error 404 Maybe try 'npm search amqp'
+31 error 404
+31 error 404 Note that you can also install from a
+31 error 404 tarball, folder, or http url, or git url.
+32 error System Darwin 12.2.0
+33 error command "node" "/usr/local/bin/npm" "install" "node-amqp"
+34 error cwd /Users/jwalton/workspace/DominionAlpha/DominionNodeServer
+35 error node -v v0.8.11
+36 error npm -v 1.1.62
+37 error code E404
+38 verbose exit [ 1, true ]

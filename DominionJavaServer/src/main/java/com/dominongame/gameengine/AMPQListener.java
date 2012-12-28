@@ -34,7 +34,7 @@ public class AMPQListener {
      }
 
      public void startListening() {
-          log.info("Starting client listener");
+          log.info("Starting AMPQ client listener");
           clt = new ClientListenerThread();
           Thread t = new Thread(clt);
           t.start();
@@ -62,7 +62,7 @@ public class AMPQListener {
                     channel.exchangeDelete(exchangeName);
                     channel.exchangeDeclare(exchangeName, "direct", false);
 //        channel.
-                    String queueName = channel.queueDeclare("dominion-queue", false, false, false, null).getQueue();
+                    String queueName = channel.queueDeclare("dominion-java-server-data-request-queue", false, false, false, null).getQueue();
                     System.out.println("QUEUE NAME = " + queueName);
                     channel.queueBind(queueName, exchangeName, routingKey);
 

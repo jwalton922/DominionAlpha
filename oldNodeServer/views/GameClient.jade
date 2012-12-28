@@ -1,0 +1,25 @@
+script(type='text/javascript', src='/javascripts/jquery-1.5.1.min.js')
+script(type='text/javascript', src='/javascripts/dominion/sprite.js')
+script(type='text/javascript', src='/socket.io/socket.io.js')
+script(type='text/javascript', src='/javascripts/dominion/RenderEngine.js')
+script(type='text/javascript', src='/javascripts/dominion/game_engine_classes.js')
+script(type='text/javascript', src='/javascripts/dominion/game_engine.js')
+script(type='text/javascript', src='/javascripts/dominion/clientCommunication.js')
+script(type='text/javascript', src='/javascripts/dominion/config.js')
+script(type='text/javascript', src='/javascripts/dominion/InputHandler.js')
+
+
+
+body(onload='GameEngine.init();')
+
+  div(style='display: inline;', id='canvasHolder')
+    canvas(id='canvas', width='1000', height='600', onclick='GameEngine.processClick(event);', style="border: solid 1px black;")
+  div(id='info',style='border: blue solid 1px; display:inline;width:300;height:400;')
+    "text"
+  br
+
+  
+  div(id="username", style='visibility:hidden;')
+    #{session.username}
+  div(id="token", style='visibility:hidden;')
+    #{session.token}

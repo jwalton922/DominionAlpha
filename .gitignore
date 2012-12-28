@@ -2,3 +2,4 @@
 DominionJavaServer/target
 DominionJavaServer/target/*
 
+/DominionJavaClient/nbproject/private/
